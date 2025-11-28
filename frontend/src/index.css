@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  height: 100%;
+  font-family: "Poppins", serif;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-width: 100vw; /* Prevent content from exceeding viewport width */
+  box-sizing: border-box; /* Ensure padding & borders don’t increase width */
+}
+
+.container { 
+  padding: 5px 5%;
+  max-width: 100%; /* Ensures it does not exceed screen width */
+  overflow-x: hidden; /* Prevents any horizontal movement */
+}
+.section-heading {
+  padding-top: 50px; /* Space below navbar */
+  margin-top: -50px; /* Compensate for the section overlap */
+}
+.phone-container {
+  width: 100%;
+}
+
+.phone-input {
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #d1d5db !important; /* Tailwind's gray-300 */
+  border-radius: 0.375rem !important; /* Tailwind's rounded */
+  font-size: 1rem !important;
+  box-sizing: border-box !important;
+}
+/* Hide scrollbar for Chrome, Safari and Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
