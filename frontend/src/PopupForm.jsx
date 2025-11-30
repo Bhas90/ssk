@@ -40,10 +40,7 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
     if (hasSubmitted) return;
 
     if (typeof externalShow === "undefined") {
-      const timer = setTimeout(() => {
-        setShowPopup(true);
-      }, 10000);
-
+      const timer = setTimeout(() => setShowPopup(true), 10000);
       return () => clearTimeout(timer);
     }
   }, [externalShow, hasSubmitted]);
@@ -84,25 +81,22 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+
     setIsSubmitting(true);
 
     try {
-      const res = await axios.post("https://api.sujay-sierra.com/home/send-email", {
+      await axios.post("https://api.sujay-sierra.com/home/send-email", {
         name: formData.name,
         email: formData.email,
         mobile: formData.mobile.replace(/\D/g, ""),
         ip: formData.ip,
       });
 
-      // Add ?submitted=true to URL
       window.history.pushState({}, "", "?submitted=true");
       setHasSubmitted(true);
-
-      // Show thank you popup
       setShowPopup(false);
       setShowThankYou(true);
 
-      // Reset form
       setFormData((prev) => ({
         name: "",
         email: "",
@@ -110,7 +104,6 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
         agreeTerms: false,
         ip: prev.ip,
       }));
-
     } catch (err) {
       alert("Submission failed. Please try again.");
     } finally {
@@ -125,11 +118,46 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
     ) : null;
   }
 
-  // Hide popup if user closes or externalShow = false
+  // Hide popup if user closes
   if (!isShown) return null;
 
   return (
     <>
+      {/* ⭐ PHONE INPUT STYLES ⭐ */}
+      <style>{`
+        .phone-wrapper {
+          border: 1px solid #d1d5db;
+          border-radius: 8px;
+          padding: 6px;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          transition: 0.2s ease-in-out;
+        }
+        .phone-wrapper:focus-within {
+          border-color: #002954;
+          box-shadow: 0 0 0 3px rgba(0, 41, 84, 0.15);
+        }
+        .phone-input {
+          width: 100% !important;
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+          font-size: 15px !important;
+          padding-left: 50px !important;
+          padding-top: 10px !important;
+          padding-bottom: 10px !important;
+        }
+        .phone-dropdown {
+          border: none !important;
+          background: transparent !important;
+        }
+        .react-tel-input .form-control {
+          border: none !important;
+          background: transparent !important;
+        }
+      `}</style>
+
       {/* Lead Form Popup */}
       <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4">
         <div className="bg-white p-6 sm:p-8 rounded-lg shadow-xl w-full max-w-lg relative">
@@ -146,6 +174,7 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
           </h2>
 
           <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+            
             <input
               type="text"
               name="name"
@@ -155,9 +184,7 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
               className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name}</p>
-            )}
+            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
             <input
               type="email"
@@ -168,23 +195,32 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
               className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email}</p>
-            )}
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-            <PhoneInput
-              country="in"
-              value={formData.mobile}
-              onChange={(value) =>
-                setFormData((prev) => ({ ...prev, mobile: value }))
-              }
-              inputProps={{ name: "mobile", required: true }}
-              containerClass="phone-container"
-              inputClass="phone-input"
-            />
-            {errors.mobile && (
-              <p className="text-red-500 text-sm">{errors.mobile}</p>
-            )}
+            {/* ⭐ UPDATED MOBILE NUMBER UI ⭐ */}
+            <div className="space-y-1">
+              <label className="text-gray-700 font-medium text-sm">
+                Mobile Number*
+              </label>
+
+              <div className="phone-wrapper">
+                <PhoneInput
+                  country="in"
+                  value={formData.mobile}
+                  onChange={(value) =>
+                    setFormData((prev) => ({ ...prev, mobile: value }))
+                  }
+                  inputProps={{ name: "mobile", required: true }}
+                  containerClass="w-full"
+                  inputClass="phone-input"
+                  buttonClass="phone-dropdown"
+                />
+              </div>
+
+              {errors.mobile && (
+                <p className="text-red-500 text-sm">{errors.mobile}</p>
+              )}
+            </div>
 
             <div className="flex items-start text-sm">
               <input
@@ -195,9 +231,7 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
                 className="mr-2 mt-1"
                 required
               />
-              <span>
-                I accept T&C and Privacy Policy.
-              </span>
+              <span>I accept T&C and Privacy Policy.</span>
             </div>
             {errors.agreeTerms && (
               <p className="text-red-500 text-sm">{errors.agreeTerms}</p>
@@ -215,14 +249,12 @@ const PopupForm = ({ show: externalShow, onClose: externalOnClose }) => {
       </div>
 
       {/* Thank You Popup */}
-      {showThankYou && (
-        <ThankYouModal onClose={() => setShowThankYou(false)} />
-      )}
+      {showThankYou && <ThankYouModal onClose={() => setShowThankYou(false)} />}
     </>
   );
 };
 
-// ⭐ THANK YOU MODAL COMPONENT
+// THANK YOU MODAL
 const ThankYouModal = ({ onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 z-[9999] flex items-center justify-center px-4">
@@ -234,7 +266,7 @@ const ThankYouModal = ({ onClose }) => {
 
         <button
           onClick={onClose}
-          className="w-full py-2 bg-[#fea611] hover:bg-[##fea611] text-white rounded transition"
+          className="w-full py-2 bg-[#fea611] hover:bg-[#002954] text-white rounded transition"
         >
           OK
         </button>
