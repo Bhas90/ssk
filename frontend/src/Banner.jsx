@@ -17,7 +17,6 @@ const Banner = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /* Detect ?submitted=true */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("submitted") === "true") {
@@ -25,7 +24,6 @@ const Banner = () => {
     }
   }, []);
 
-  /* Fetch IP Address */
   useEffect(() => {
     axios
       .get("https://api64.ipify.org?format=json")
@@ -99,21 +97,60 @@ const Banner = () => {
   return (
     <div className="w-full px-4 py-12 md:px-6 bg-white">
 
+      <style>{`
+        .phone-wrapper {
+          border: 1px solid #d1d5db;
+          border-radius: 8px;
+          padding: 6px;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          transition: 0.2s ease-in-out;
+        }
+        .phone-wrapper:focus-within {
+          border-color: #002954;
+          box-shadow: 0 0 0 3px rgba(0, 41, 84, 0.15);
+        }
+        .disabled-phone {
+          opacity: 0.7;
+          background: #f3f4f6;
+          pointer-events: none;
+        }
+        .phone-input {
+          width: 100% !important;
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+          font-size: 16px !important;
+          padding-left: 50px !important;
+          padding-top: 10px !important;
+          padding-bottom: 10px !important;
+          color: #111827 !important;
+        }
+        .phone-dropdown {
+          border: none !important;
+          background: transparent !important;
+          padding-left: 8px !important;
+        }
+        .react-tel-input .form-control {
+          border: none !important;
+          background: transparent !important;
+        }
+      `}</style>
+
       {/* CONTACT FORM BOX */}
-      <div className="w-full bg-white p-6 md:p-8 ">
+      <div className="w-full bg-white p-6 md:p-8">
 
         <h2 className="text-xl md:text-2xl font-bold text-center text-gray-900 mb-4">
           REQUEST CALLBACK TODAY!
         </h2>
 
-        {/* THANK YOU MESSAGE */}
         {hasSubmitted && (
           <div className="bg-green-100 text-green-700 text-center p-3 rounded mb-4 font-medium">
             Thank you! We have received your enquiry. Our team will contact you shortly.
           </div>
         )}
 
-        {/* FORM */}
         <form className="space-y-4" onSubmit={handleFormSubmit} noValidate>
 
           <input
@@ -142,20 +179,31 @@ const Banner = () => {
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-          <PhoneInput
-            country="in"
-            disabled={hasSubmitted}
-            value={formData.mobile}
-            onChange={(value) =>
-              !hasSubmitted && setFormData((prev) => ({ ...prev, mobile: value }))
-            }
-            containerClass="w-full"
-            inputClass={`py-4 bg-transparent ${
-              hasSubmitted ? "bg-gray-100 cursor-not-allowed" : ""
-            }`}
-            inputProps={{ name: "mobile", required: true }}
-          />
-          {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
+          {/* MOBILE NUMBER UI IMPROVED */}
+          <div className="space-y-1">
+            <label className="text-gray-700 font-medium text-sm">
+              Mobile Number*
+            </label>
+
+            <div className={`phone-wrapper ${hasSubmitted ? "disabled-phone" : ""}`}>
+              <PhoneInput
+                country="in"
+                disabled={hasSubmitted}
+                value={formData.mobile}
+                onChange={(value) =>
+                  !hasSubmitted && setFormData((prev) => ({ ...prev, mobile: value }))
+                }
+                containerClass="w-full"
+                inputClass="phone-input"
+                buttonClass="phone-dropdown"
+                inputProps={{ name: "mobile", required: true }}
+              />
+            </div>
+
+            {errors.mobile && (
+              <p className="text-red-500 text-sm">{errors.mobile}</p>
+            )}
+          </div>
 
           <div className="flex items-start text-sm">
             <input
@@ -190,7 +238,6 @@ const Banner = () => {
           </button>
         </form>
       </div>
-
     </div>
   );
 };
