@@ -42,3 +42,43 @@ html, body {
 .no-scrollbar {
   scrollbar-width: none;
 }
+/* Global 70% left (scrollable) and 30% fixed right layout */
+
+.layout-container {
+  width: 100%;
+  display: flex;
+}
+
+.left-content {
+  padding-right: 10px; /* Gap between left & right */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.right-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-left: 1px solid #e5e7eb;
+  padding: 10px;
+}
+@media (max-width: 1024px) {
+  .layout-container {
+    flex-direction: column;
+  }
+
+  .left-content,
+  .right-sidebar {
+    width: 100% !important;
+    position: relative !important;
+    height: auto !important;
+  }
+
+  .right-sidebar {
+    border-left: none;
+    border-top: 1px solid #e5e7eb;
+  }
+}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import logo from "./assets/banner_1.webp";
 
 const Banner = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -18,7 +17,7 @@ const Banner = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Detect ?submitted=true in URL
+  /* Detect ?submitted=true */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("submitted") === "true") {
@@ -26,7 +25,7 @@ const Banner = () => {
     }
   }, []);
 
-  // Fetch IP
+  /* Fetch IP Address */
   useEffect(() => {
     axios
       .get("https://api64.ipify.org?format=json")
@@ -39,8 +38,9 @@ const Banner = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    if (hasSubmitted) return; // disable edits
+    if (hasSubmitted) return;
     const { name, value, type, checked } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
@@ -51,7 +51,9 @@ const Banner = () => {
     if (hasSubmitted) return false;
 
     const newErrors = {};
+
     if (!formData.name.trim()) newErrors.name = "Name is required";
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = "Invalid email address";
 
@@ -84,10 +86,8 @@ const Banner = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      // Add URL param
       window.history.pushState({}, "", "?submitted=true");
       setHasSubmitted(true);
-
     } catch (error) {
       console.error("Error sending email:", error);
       alert("Unable to submit. Please try again.");
@@ -97,115 +97,100 @@ const Banner = () => {
   };
 
   return (
-    <div
-      className="relative w-full min-h-screen flex items-center justify-center bg-cover bg-center px-4 sm:px-6 lg:px-12 py-6"
-      style={{ backgroundImage: `url(${logo})` }}
-    >
-      <div className="absolute inset-0 bg-black/70"></div>
+    <div className="w-full px-4 py-12 md:px-6 bg-white">
 
-      <div className="relative w-full max-w-6xl flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-6">
+      {/* CONTACT FORM BOX */}
+      <div className="w-full bg-white p-6 md:p-8 ">
 
-        {/* LEFT COLUMN — unchanged */}
-        <div className="p-4 md:p-6 lg:p-8 text-white max-w-md md:w-1/2 z-10 text-center md:text-left">
-          <h1 className="text-2xl md:text-4xl font-bold leading-snug mb-4">
-            Discover Urban Living at Its Finest
-          </h1>
-          <p className="text-lg md:text-xl text-gray-100 mb-4">
-            Schedule your{" "}
-            <span style={{ color: "#fea611" }}>exclusive site visit</span> today at{" "}
-            <span style={{ color: "#fea611" }}>
-              <strong>Vishaka, Patiganpur Road</strong>
-            </span>{" "}
-            — Hyderabad’s most promising address for future-forward living.
-          </p>
-          <hr className="border-gray-500" />
-          RERA NO: P01100006350
-        </div>
+        <h2 className="text-xl md:text-2xl font-bold text-center text-gray-900 mb-4">
+          REQUEST CALLBACK TODAY!
+        </h2>
 
-        {/* RIGHT COLUMN — Contact Form */}
-        <div className="bg-white p-5 sm:p-6 md:p-8 rounded-lg shadow-xl w-full max-w-lg z-10">
+        {/* THANK YOU MESSAGE */}
+        {hasSubmitted && (
+          <div className="bg-green-100 text-green-700 text-center p-3 rounded mb-4 font-medium">
+            Thank you! We have received your enquiry. Our team will contact you shortly.
+          </div>
+        )}
 
-          <h2 className="text-xl md:text-2xl font-bold text-center text-gray-900 mb-2">
-            REQUEST CALLBACK TODAY!
-          </h2>
+        {/* FORM */}
+        <form className="space-y-4" onSubmit={handleFormSubmit} noValidate>
 
-          {/* THANK YOU MESSAGE (Option D) */}
-          {hasSubmitted && (
-            <div className="bg-green-100 text-green-700 text-center p-3 rounded mb-4 font-medium">
-              Thank you! We have received your enquiry. Our team will contact you shortly.
-            </div>
+          <input
+            type="text"
+            name="name"
+            disabled={hasSubmitted}
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Full Name*"
+            className={`w-full p-3 border rounded ${
+              hasSubmitted ? "bg-gray-200 cursor-not-allowed" : "border-gray-300"
+            }`}
+          />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+
+          <input
+            type="email"
+            name="email"
+            disabled={hasSubmitted}
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Email Address*"
+            className={`w-full p-3 border rounded ${
+              hasSubmitted ? "bg-gray-200 cursor-not-allowed" : "border-gray-300"
+            }`}
+          />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+
+          <PhoneInput
+            country="in"
+            disabled={hasSubmitted}
+            value={formData.mobile}
+            onChange={(value) =>
+              !hasSubmitted && setFormData((prev) => ({ ...prev, mobile: value }))
+            }
+            containerClass="w-full"
+            inputClass={`py-4 bg-transparent ${
+              hasSubmitted ? "bg-gray-100 cursor-not-allowed" : ""
+            }`}
+            inputProps={{ name: "mobile", required: true }}
+          />
+          {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
+
+          <div className="flex items-start text-sm">
+            <input
+              type="checkbox"
+              name="agreeTerms"
+              disabled={hasSubmitted}
+              checked={formData.agreeTerms}
+              onChange={handleInputChange}
+              className="mr-2 mt-1"
+            />
+            <span>
+              I authorize Sujay Infra to Call, SMS, Email or WhatsApp me. I also accept
+              T&C and Privacy Policy.
+            </span>
+          </div>
+          {errors.agreeTerms && (
+            <p className="text-red-500 text-sm">{errors.agreeTerms}</p>
           )}
 
-          <form className="space-y-4" onSubmit={handleFormSubmit} noValidate>
-
-            <input
-              type="text"
-              name="name"
-              disabled={hasSubmitted}
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Full Name*"
-              className={`w-full p-3 border rounded ${hasSubmitted ? "bg-gray-200 cursor-not-allowed" : "border-gray-300"}`}
-            />
-            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-
-            <input
-              type="email"
-              name="email"
-              disabled={hasSubmitted}
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="Email Address*"
-              className={`w-full p-3 border rounded ${hasSubmitted ? "bg-gray-200 cursor-not-allowed" : "border-gray-300"}`}
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-
-            <PhoneInput
-              country="in"
-              disabled={hasSubmitted}
-              value={formData.mobile}
-              onChange={(value) =>
-                !hasSubmitted && setFormData((prev) => ({ ...prev, mobile: value }))
-              }
-              containerClass="w-full"
-              inputClass={`py-4 bg-transparent ${hasSubmitted ? "bg-gray-100 cursor-not-allowed" : ""}`}
-              inputProps={{ name: "mobile", required: true }}
-            />
-            {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
-
-            <div className="flex items-start text-sm">
-              <input
-                type="checkbox"
-                name="agreeTerms"
-                disabled={hasSubmitted}
-                checked={formData.agreeTerms}
-                onChange={handleInputChange}
-                className="mr-2 mt-1"
-              />
-              <span>
-                I authorize Bhavya Group to Call, SMS, Email or WhatsApp me. I also accept T&C and Privacy Policy.
-              </span>
-            </div>
-            {errors.agreeTerms && (
-              <p className="text-red-500 text-sm">{errors.agreeTerms}</p>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting || hasSubmitted}
-              className={`w-full text-white p-3 rounded text-lg transition bg-gradient-to-r from-[#002954] to-[#fea611] hover:opacity-90 ${
-                hasSubmitted ? "opacity-60 cursor-not-allowed" : ""
-              }`}
-            >
-              {hasSubmitted
-                ? "Submitted"
-                : isSubmitting
-                ? "Submitting..."
-                : "Submit your request"}
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            disabled={isSubmitting || hasSubmitted}
+            className={`w-full text-white p-3 rounded text-lg 
+              transition bg-gradient-to-r from-[#002954] to-[#fea611] hover:opacity-90 
+              ${hasSubmitted ? "opacity-60 cursor-not-allowed" : ""}`}
+          >
+            {hasSubmitted
+              ? "Submitted"
+              : isSubmitting
+              ? "Submitting..."
+              : "Submit your request"}
+          </button>
+        </form>
       </div>
+
     </div>
   );
 };

@@ -29,15 +29,15 @@ app.get("/home", (req, res) => {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "admin@aurealconsulting.com",
-    pass: "ihdt hwnd ipyx iacl", // ⚠️ replace with Gmail App Password
+    user: "sales@sujayinfra.com",
+    pass: "vaxd tvym zywa vgii", // ⚠️ replace with Gmail App Password
   },
 });
 
 // ✅ Auto-reply to user
 const sendAutoReply = async (userEmail, userName) => {
   const mailOptions = {
-    from: `"Bhavya Evora" <admin@aurealconsulting.com>`,
+    from: `"Sujay Sierra" <sales@sujayinfra.com>`,
     to: userEmail,
     subject: "Thank You for Your Interest!",
     html: `
@@ -47,13 +47,13 @@ const sendAutoReply = async (userEmail, userName) => {
         </div>
         <div style="padding:20px;">
           <h2 style="color:#047bc5;">Hello ${userName},</h2>
-          <p>Thank you for reaching out to <strong>Bhavya Evora</strong>!</p>
+          <p>Thank you for reaching out to <strong>Sujay Infra</strong>!</p>
           <p>We’ll get in touch with you shortly to assist you further.</p>
           <hr style="border:none; border-top:1px solid #ddd; margin:20px 0;" />
           <p>If you have any questions, call us at <a href="tel:+917899051883" style="color:#047bc5;">+91-7899051883</a>.</p>
         </div>
         <div style="background-color:#f0f0f0; padding:15px 20px; text-align:center; color:#666;">
-          <p style="margin:0; font-style:italic;">Warm regards,<br/>Team Bhavya Evora</p>
+          <p style="margin:0; font-style:italic;">Warm regards,<br/>Team Sujay Infra</p>
         </div>
       </div>
     `,
@@ -64,9 +64,9 @@ const sendAutoReply = async (userEmail, userName) => {
 // ✅ Notify admin
 const notifyAdmin = async (formData) => {
   const mailOptions = {
-    from: `"Bhavya Evora" <admin@aurealconsulting.com>`,
-    to: "sainath@aurealconsulting.com",
-    subject: "New Lead - Bhavya Evora",
+    from: `"Sujay Sierra" <sales@sujayinfra.com>`,
+    to: "sales@sujayinfra.com",
+    subject: "New Lead - Sierra",
     html: `
       <div style="font-family: Arial; max-width:600px; margin:auto; border:1px solid #ddd; border-radius:8px; overflow:hidden;">
         <div style="background-color:#047bc5; color:white; padding:15px 20px; text-align:center;">
@@ -110,9 +110,9 @@ const notifyAdmin = async (formData) => {
 // ✅ TeleCRM Integration (corrected using PHP reference)
 const pushToTeleCRM = async (lead) => {
   const telecrmUrl =
-    "https://api.telecrm.in/enterprise/669f8deb9c0669c069b90fc3/autoupdatelead";
+    "https://api.telecrm.in/enterprise/67d5aa50df7dd0280ad486f5/autoupdatelead";
   const telecrmAuth =
-    "Bearer dfc2d8a1-cca4-4226-b121-ebe4b22f6b071721799771196:b0f4940e-3a88-4941-9f34-5485c382e5d7";
+    "Bearer e438ee2c-2b98-4c2b-bfe9-b13013c84c871764502830227:0b0d3fe2-038d-4238-80b8-15e2dbf7aac6";
 
   // ✅ Based on working PHP payload
   const payload = {
@@ -125,7 +125,7 @@ const pushToTeleCRM = async (lead) => {
     actions: [
       {
         type: "SYSTEM_NOTE",
-        text: "Lead Source: Bhavya Evora Website",
+        text: "Lead Source: Sujay Sierra Website",
       },
     ],
   };

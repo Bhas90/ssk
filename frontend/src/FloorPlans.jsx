@@ -2,15 +2,15 @@
 import React, { useState, useRef } from "react";
 
 // MASTER PLAN
-import MasterPlanImg from "./assets/evora-masterplan.webp";
+import MasterPlanImg from "./assets/sujay-sierra-master.webp";
 
 // UNIT PLAN IMAGES
-import villa1 from "./assets/plan-1.webp";
-import villa2 from "./assets/plan-2.webp";
-import villa3 from "./assets/plan-3.webp";
-import villa4 from "./assets/plan-4.webp";
-import villa5 from "./assets/plan-5.webp";
-import villa6 from "./assets/plan-6.webp";
+import villa1 from "./assets/1265.webp";
+import villa2 from "./assets/1330.webp";
+import villa3 from "./assets/1610.webp";
+import villa4 from "./assets/1715.webp";
+import villa5 from "./assets/1780.webp";
+import villa6 from "./assets/1790.webp";
 
 // unit plan array
 const unitPlanImages = [villa1, villa2, villa3, villa4, villa5, villa6];
@@ -61,11 +61,11 @@ const FloorPlans = () => {
     <section className="scroll-mt-10 py-12 px-[5%] bg-white" id="master">
 
       <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 text-gray-900">
-          With harmony in <span style={{ color: "#fea611" }}>Nature</span>
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-3 text-gray-900">
+          Designed to Blend With the <span style={{ color: "#fea611" }}>Natural Canvas</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto">
-          Bhavya Evora’s elegant blocks offer stunning views and world-class living.
+          Sujay Sierra’s beautifully planned blocks, offering stunning vistas that enrich your daily living experience.
         </p>
       </div>
 

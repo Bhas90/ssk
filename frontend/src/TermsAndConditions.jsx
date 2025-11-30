@@ -1,12 +1,13 @@
 import React from "react";
-import tLogo from "./assets/banner_1.webp";
+import tLogo from "./assets/sujay-sierra-aerial-view.webp";
+import Footer from "./Footer";
 
 const TermsAndConditions = () => {
   return (
     <div className="w-full">
       {/* Fully Responsive Banner Image */}
       <div
-        className="w-screen h-60 sm:h-72 md:h-80 lg:h-[500px] bg-contain sm:bg-cover bg-center bg-no-repeat"
+        className="w-screen h-60 sm:h-72 md:h-80 lg:h-[400px] bg-contain sm:bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${tLogo})`,
         }}
@@ -70,6 +71,7 @@ const TermsAndConditions = () => {
           this website following changes constitutes your agreement to the revised terms.
         </p>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import StudyAbroadForm from "./StudyAbroadForm";
 import AdvantageSection from "./AdvantageSection";
 import StudyAbroad from "./StudyAbroad";
 import ProjectOverview from "./ProjectOverview";
 import AmenitiesSection from "./AmenitiesSection";
-import Banner from "./Banner";
 import ConnectivitySection from "./ConnectivitySection";
 import PricingSection from "./PricingSection";
 import WhatsAppButton from "./WhatsAppButton";
@@ -12,56 +12,67 @@ import PopupForm from "./PopupForm";
 import AttentionGrabberButton from "./AttentionGrabberButton";
 import FloorPlans from "./FloorPlans";
 import AmenitiesSlider from "./AmenitiesSlider";
-
-
+import Banner from "./Banner";
+import BannerForm from "./BannerForm";
+import Footer from "./Footer";
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
+
+  // Inject Banner into RIGHT fixed panel (desktop only)
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      const container = document.getElementById("right-banner-container");
+      if (container) {
+        ReactDOM.render(<Banner />, container);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowPopup(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
+  const isMobile = window.innerWidth < 768;
+
   return (
     <>
-    
       <StudyAbroadForm />
-      <AttentionGrabberButton/>
+      <AttentionGrabberButton />
+
       <div id="project-overview">
-        <h2 className="section-heading"></h2>
         <ProjectOverview />
       </div>
-      
+
       <div id="amenities">
-        <h2 className="section-heading"></h2>
         <AmenitiesSection />
       </div>
-      <AmenitiesSlider/>
+
+      <AmenitiesSlider />
+
       <div id="pricing">
-        <h2 className="section-heading"></h2>
         <PricingSection />
       </div>
-      
-        <FloorPlans/>
-      
+
+      <FloorPlans />
+
       <div id="nri-support">
-        <h2 className="section-heading"></h2>
         <AdvantageSection />
       </div>
-      <div id="banner-section">
-        <Banner />
-      </div>
+
       <div id="connectivity">
-        <h2 className="section-heading"></h2>
         <ConnectivitySection />
       </div>
+
       <div id="about">
-        <h2 className="section-heading"></h2>
         <StudyAbroad />
       </div>
+      {/* MOBILE ONLY: BannerForm */}
+      {isMobile && <BannerForm />}
       <WhatsAppButton />
       <PopupForm show={showPopup} onClose={() => setShowPopup(false)} />
+        <Footer/>
     </>
   );
 };

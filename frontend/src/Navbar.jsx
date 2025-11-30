@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
-import mlogo from "./assets/Bhavya-evora-logo.png";
+import mlogo from "./assets/logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,10 +66,10 @@ const Navbar = () => {
         <button onClick={() => scrollToSection("connectivity")} className="px-4 py-2 border border-transparent border rounded hover:border-green-700 transition duration-300">Connectivity</button>
         <button onClick={() => scrollToSection("about")} className="px-4 py-2 border border-transparent border rounded hover:border-green-700 transition duration-300">About</button>
         <a
-          href="callto:+917899051883"
+          href="callto:+91720952288"
           className="blinking-button px-4 py-2 text-white rounded-full shadow-md hover:opacity-90 transition duration-300 bg-gradient-to-r from-[#fea611] to-[#0f355f]"
         >
-        Call +91-7899051883
+        Call +91-720952288
       </a>
 
       </nav>
@@ -85,10 +85,10 @@ const Navbar = () => {
           <button onClick={() => scrollToSection("connectivity")}>Connectivity</button>
           <button onClick={() => scrollToSection("about")}>About</button>
           <a
-          href="callto:+917899051883"
+          href="callto:+917207952288"
           className="blinking-button px-4 py-2 text-white rounded-full shadow-md hover:opacity-90 transition duration-300 bg-gradient-to-r from-[#fea611] to-[#0f355f]"
         >
-            Call +91-7899051883
+            Call +91-7207952288
           </a>
 
         </div>

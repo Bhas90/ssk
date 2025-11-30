@@ -1,12 +1,13 @@
 import React from "react";
-import pLogo from "./assets/banner_1.webp";
+import pLogo from "./assets/sujay-sierra-aerial-view.webp";
+import Footer from "./Footer";
 
 const PrivacyPolicy = () => {
   return (
     <div className="w-full">
       {/* Full-Width Banner Image */}
       <div
-        className="w-screen h-60 sm:h-72 md:h-80 lg:h-[500px] bg-contain sm:bg-cover bg-center bg-no-repeat"
+        className="w-screen h-60 sm:h-72 md:h-80 lg:h-[400px] bg-contain sm:bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${pLogo})`,
         }}
@@ -63,6 +64,7 @@ const PrivacyPolicy = () => {
 
         
       </div>
+      <Footer/>
     </div>
   );
 };

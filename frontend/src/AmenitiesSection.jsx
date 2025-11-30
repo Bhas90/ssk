@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Trees,
   Flower2,
@@ -41,27 +41,33 @@ const amenities = [
 ];
 
 const AmenitiesSection = () => {
+  const [showMore, setShowMore] = useState(false);
+
+  // Show only first 8 items (2 rows) when collapsed
+  const visibleAmenities = showMore ? amenities : amenities.slice(0, 8);
+
   return (
-    <section id="amenities" className="py-12 px-6 text-gray-900">
-      
-      {/* Title + Caption */}
+    <section id="amenities" className="py-20 px-6 text-gray-900">
+
+      {/* Title */}
       <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3">
-          Exclusive Lifestyle <span className="text-[#fea611]">Amenities</span>
-        </h2>
-        <p className="text-gray-600 max-w-xl mx-auto">
-          Thoughtfully designed spaces to elevate your everyday lifestyle.
-        </p>
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-3">
+        Inspired Amenities for <span className="text-[#fea611]">Every Lifestyle</span>
+      </h2>
+
+      <p className="text-gray-600 max-w-xl mx-auto">
+        A perfect blend of wellness, greenery, and recreation—crafted to enrich everyday living.
+      </p>
       </div>
 
-      {/* Amenities Grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10">
-        {amenities.map((item, index) => (
+      {/* Amenities Grid: 4 Columns */}
+      <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        {visibleAmenities.map((item, index) => (
           <div
             key={index}
             className="
-              flex flex-col items-center text-center gap-3 
-              bg-white rounded-xl p-4 
+              flex flex-col items-center text-center
+              bg-white rounded-xl p-3 
               shadow-md 
               transition-all duration-300 
               hover:shadow-xl 
@@ -75,6 +81,24 @@ const AmenitiesSection = () => {
             <p className="text-sm tracking-wide font-medium">{item.label}</p>
           </div>
         ))}
+      </div>
+
+      {/* Show More / Show Less Button */}
+      <div className="mt-10 text-center">
+        <button
+          onClick={() => setShowMore(!showMore)}
+          className="
+            px-8 py-3 
+            rounded-full 
+            bg-[#fea611] 
+            text-white font-semibold 
+            shadow-md 
+            hover:bg-[#ffbd42] 
+            transition-all duration-300
+          "
+        >
+          {showMore ? "Show Less" : "Show More"}
+        </button>
       </div>
     </section>
   );

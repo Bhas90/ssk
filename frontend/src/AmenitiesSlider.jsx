@@ -1,39 +1,39 @@
 import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import img1 from "./assets/gallery-1.webp";
-import img2 from "./assets/gallery-2.webp";
-import img3 from "./assets/gallery-3.webp";
-import img4 from "./assets/gallery-4.webp";
-import img5 from "./assets/gallery-5.webp";
-import img6 from "./assets/gallery-6.webp";
-import img7 from "./assets/gallery-7.webp";
-import img8 from "./assets/gallery-8.webp";
-import img9 from "./assets/gallery-9.webp";
-import img10 from "./assets/gallery-10.webp";
-import img11 from "./assets/gallery-11.webp";
-import img12 from "./assets/gallery-12.webp";
-import img13 from "./assets/gallery-13.webp";
-import img14 from "./assets/gallery-14.webp";
-import img15 from "./assets/gallery-15.webp";
+import img1 from "./assets/sujay-sierra-aerial-view.webp";
+import img2 from "./assets/sujay-sierra-basket-bll.webp";
+import img3 from "./assets/sujay-sierra-car-parkingl.webp";
+import img4 from "./assets/sujay-sierra-car-parking.webp";
+import img5 from "./assets/sujay-sierra-clubhouse-1.webp";
+import img7 from "./assets/sujay-sierra-day-kidaplya-area.webp";
+import img8 from "./assets/sujay-sierra-day-walking-area.webp";
+import img9 from "./assets/sujay-sierra-entrance.webp";
+import img10 from "./assets/sujay-sierra-fron-view.webp";
+import img12 from "./assets/sujay-sierra-gymnastics.webp";
+import img13 from "./assets/sujay-sierra-kidaplya-area-night.webp";
+import img14 from "./assets/sujay-sierra-meditation-hall.webp";
+import img15 from "./assets/sujay-sierra-night-walking-area.webp";
+import img16 from "./assets/sujay-sierra-outdoor-games.webp";
+import img17 from "./assets/sujay-sierra-party-lawn.webp";
 
 
 const amenitiesData = [
-  { img: img1, title: "Welcome Lounge" },
-  { img: img2, title: "Indoor Games" },
-  { img: img3, title: "Indoor Games" },
-  { img: img4, title: "Multi-Purpose Hall" },
+  { img: img1, title: "Aerial View" },
+  { img: img2, title: "Half Basketball Court" },
+  { img: img3, title: "Parking Area" },
+  { img: img4, title: "Parking Area Night View" },
   { img: img5, title: "Clubhouse" },
-  { img: img6, title: "Night View" },
-  { img: img7, title: "Walking Path" },
+  { img: img7, title: "Kids Play Area" },
   { img: img8, title: "Outdoor Seating" },
-  { img: img9, title: "Mini Theatre" },
-  { img: img10, title: "Creche" },
-  { img: img11, title: "Day View" },
-  { img: img12, title: "Coffee Shop" },
-  { img: img13, title: "Yoga Deck" },
-  { img: img14, title: "Swimming Pool" },
-  { img: img15, title: "Yoga/Meditation" },
+  { img: img9, title: "Entrance" },
+  { img: img10, title: "Front Elevation" },
+  { img: img12, title: "GYM" },
+  { img: img13, title: "Kids Play Area Night View" },
+  { img: img14, title: "Yoga Deck" },
+  { img: img15, title: "Party Lawn" },
+  { img: img16, title: "Outdoor Games" },
+  { img: img17, title: "Walking Area" },
 ];
 
 const AmenitiesSlider = () => {
@@ -52,15 +52,16 @@ const AmenitiesSlider = () => {
   };
 
   return (
-    <section id="amenities-gallery" className="px-[8%] py-16 scroll-mt-10">
+    <section id="amenities-gallery" className="px-[8%] py-12 scroll-mt-10">
       {/* Heading Section */}
       <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3">
-          Experience the Luxury in <span className="text-[#fea611]">Pictures</span>
-        </h2>
-        <p className="text-gray-600 max-w-xl mx-auto">
-          Discover the spaces and experiences that truly elevated lifestyle.
-        </p>
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-3">
+  Thoughtful Spaces, <span className="text-[#fea611]">Designed for You</span>
+</h2>
+
+<p className="text-gray-600 max-w-xl mx-auto">
+  Explore a collection of modern lifestyle features crafted to enhance comfort, convenience, and everyday living.
+</p>
       </div>
 
       {/* Navigation Buttons */}

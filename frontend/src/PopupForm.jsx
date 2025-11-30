@@ -234,7 +234,7 @@ const ThankYouModal = ({ onClose }) => {
 
         <button
           onClick={onClose}
-          className="w-full py-2 bg-[#00b4e6] hover:bg-[#002954] text-white rounded transition"
+          className="w-full py-2 bg-[#fea611] hover:bg-[##fea611] text-white rounded transition"
         >
           OK
         </button>
