@@ -76,7 +76,7 @@ const Banner = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/home/send-email",
+        "https://api.sujay-sierra.com/home/send-email",
         {
           name: formData.name,
           email: formData.email,
