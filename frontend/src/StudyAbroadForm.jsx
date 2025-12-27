@@ -50,7 +50,7 @@ const StudyAbroadForm = () => {
                 className="blinking-button text-white px-4 py-2 rounded-full flex items-center gap-3 shadow-md transition-all duration-300"
                 style={{ backgroundColor: "#d69003ff" }}
               >
-                Starting Price: ₹78 Lacs*
+                Starting Price: ₹85 Lacs*(All Incl)
               </a>
             </div>
           </div>
@@ -143,7 +143,7 @@ const StudyAbroadForm = () => {
               font-semibold
             "
           >
-            Starting Price: ₹78 Lacs* 
+            Starting Price: ₹78 Lacs* (All Incl)
           </a>
 
           <p className="mt-4 text-lg">RERA NO: P02200005325</p>
