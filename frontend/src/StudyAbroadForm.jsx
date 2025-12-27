@@ -143,7 +143,7 @@ const StudyAbroadForm = () => {
               font-semibold
             "
           >
-            Starting Price: ₹78 Lacs* (All Incl)
+            Starting Price: ₹85 Lacs* (All Incl)
           </a>
 
           <p className="mt-4 text-lg">RERA NO: P02200005325</p>
