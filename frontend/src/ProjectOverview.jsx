@@ -32,7 +32,7 @@ const projectHighlights = [
   {
     icon: <Layers className="w-8 h-8 text-[#fea611]" />,
     title: "Clubhouse",
-    desc: "12,000 Sq.Ft | G+5 Floors",
+    desc: "12,000 Sq.Ft | G+3 Floors",
   },
   {
     icon: <Building2 className="w-8 h-8 text-[#fea611]" />,
