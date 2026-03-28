@@ -35,7 +35,7 @@ const Navbar = () => {
         <a href="/">
           <img
             src={mlogo}
-            alt="Cinq Logo"
+            alt="sujay-sierra-logo"
             className="w-auto h-auto max-w-[120px] max-h-[60px] md:max-w-[160px] md:max-h-[70px]"
           />
         </a>
@@ -66,10 +66,10 @@ const Navbar = () => {
         <button onClick={() => scrollToSection("connectivity")} className="px-4 py-2 border border-transparent border rounded hover:border-green-700 transition duration-300">Connectivity</button>
         <button onClick={() => scrollToSection("about")} className="px-4 py-2 border border-transparent border rounded hover:border-green-700 transition duration-300">About</button>
         <a
-          href="callto:+91720952288"
+          href="callto:+917207952288"
           className="blinking-button px-4 py-2 text-white rounded-full shadow-md hover:opacity-90 transition duration-300 bg-gradient-to-r from-[#fea611] to-[#0f355f]"
         >
-        Call +91-720952288
+        Call +91-7207952288
       </a>
 
       </nav>
