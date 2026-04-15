@@ -111,7 +111,7 @@ const StudyAbroadForm = () => {
             {[
               "Grand Entrance Lobby",
               "Facing: East & West",
-              "2 & 3 BHK Triplex Villas",
+              "Type: 2 & 3 BHK",
               "Possession: Ready to Move in",
             ].map((item, index) => (
               <li key={index} className="flex items-center">
