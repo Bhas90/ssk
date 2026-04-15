@@ -261,7 +261,7 @@ const ThankYouModal = ({ onClose }) => {
       <div className="bg-white p-6 sm:p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
         <h2 className="text-xl font-bold text-gray-800 mb-3">Thank You!</h2>
         <p className="text-gray-600 mb-6">
-          Your details have been submitted successfully. Our team will contact you shortly.
+          Thank you! We have received your enquiry. Our team will contact you shortly.
         </p>
 
         <button
